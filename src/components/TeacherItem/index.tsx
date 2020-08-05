@@ -4,34 +4,44 @@ import whatsappIcon from '../../assets/images/icons/whatsapp.svg';
 
 import './styles.css';
 
-function TeacherItem() {
+export interface Teacher {
+        id: number,
+        avatar: string,
+        bio: string,
+        cost: number,
+        name: string,
+        subject: string,
+        whatsapp: string
+}
+
+interface TeacherItemProps {
+    teacher: Teacher,
+}
+
+const TeacherItem: React.FunctionComponent<TeacherItemProps> = ({teacher}) =>{
     return (
         <article className="teacher-item">
                     <header>
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTf3_MOm0aKlkhPBPKHbHd4EE7hyBdejaJrVA&usqp=CAU" alt="Diogo Santos"/>
+                        <img src={teacher.avatar} alt={teacher.name}/>
                         <div>
-                            <strong>Elon Musk</strong>
-                            <span>Química</span>
+                            <strong>{teacher.name}</strong>
+                            <span>{teacher.subject}</span>
                         </div>
                         
                     </header>
                     <p>
-                        Entusiasta das Melhores tecnologias de química avançada.
-                        <br/><br/>
-                        Apaixonado por explodir coisas em laboratório e por mudar a vida das pessoas 
-                        através de experiências. Mais de 200.000 já passram por 
-                        uma das minhas explosões.
+                        {teacher.bio}
                     </p>
                     
                     <footer>
                         <p>
                             Preço/Hora
-                            <strong>R$ 80,00</strong>
+                            <strong>R$ {teacher.cost}</strong>
                         </p>
-                        <button type="button">
+                        <a href={`https://wa.me/${teacher.whatsapp}>`} type="button">
                             <img src={whatsappIcon} alt="Whatsapp"/>
                             Entrar em Contato
-                        </button>
+                        </a>
                     </footer>
                 </article>
 
